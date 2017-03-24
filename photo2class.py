@@ -14,15 +14,14 @@ def photos_class(id):
     data = []
     i = 1
     vk_data = vk_data[:10]#количество фотографий всего(берем нужное число фотографий от vk_data)
-    PhotoSet = {'all':[], 'ladies naked': [], 'ladies swimsuit': [], 'men naked': [], 'men swimsuit': []}
+    PhotoSet = {'all':[], 'cucumber': [], 'pepper': [], 'tomato': []}
     while i * batch_size <= len(vk_data):
         PhotoSet = class_of_photos(vk_data[(i-1)*batch_size:i*batch_size], PhotoSet)
         i += 1
     if (i - 1) * batch_size != len(vk_data):
         PhotoSet = class_of_photos(vk_data[(i - 1) * batch_size:], PhotoSet)
     print('все фотографии:', PhotoSet['all'])
-    print('ladies naked:', PhotoSet['ladies naked'])
-    print('ladies swimsuit:', PhotoSet['ladies swimsuit'])
-    print('men naked:', PhotoSet['men naked'])
-    print('men swimsuit:', PhotoSet['men swimsuit'])
+    print('cucumber:', PhotoSet['cucumber'])
+    print('pepper:', PhotoSet['pepper'])
+    print('tomato:', PhotoSet['tomato'])
     return PhotoSet

@@ -18,13 +18,10 @@ def captcha_handler(captcha):
 def user_photos(id):
     session = vk1.Session(access_token='5514ece0b607363d71e6045e8db3bb672b92ded395897ea50c126e49bee803399b51c2f2dafdf4567df16')
     vk = vk1.API(session)
-    values = {
-        'owner_id': id,
-        'count':100
-    }
+   
     photos = {'my_photos':[], 'friends_photos':[], 'ff_photos':[]}
     for el in vk.photos.getAll(owner_id=id, count=50)[1:]:
-        photos['my_photos'].append(el['src'])
+        photos['my_photos'].append(el['src'])  #У каждого фото есть несколько форматов Мы берем src
     friends_list = vk.friends.get(user_id=id)
     random.shuffle(friends_list)
     friends_list = friends_list[:100] #количество друзей
@@ -32,7 +29,7 @@ def user_photos(id):
         try:
             photo = vk.photos.getAll(owner_id=uid, count=10)[1:]
             for el in photo:
-                photos['friends_photos'].append(el['src'])
+                photos['friends_photos'].append(el['src'])  #У каждого фото есть несколько форматов Мы берем src
         except:
             pass
     ff_list = []
@@ -49,5 +46,5 @@ def user_photos(id):
         except:
             pass
         for el in photo:
-            photos['ff_photos'].append(el['src'])
+            photos['ff_photos'].append(el['src'])  #У каждого фото есть несколько форматов Мы берем src
     return photos
